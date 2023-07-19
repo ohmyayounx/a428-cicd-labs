@@ -1,7 +1,7 @@
 node {
     stage('Build') {
         // Set up the virtual environment and install dependencies
-        sh 'npm install'
+        sh 'build.sh'
     }
     
     stage('Test') {
