@@ -1,7 +1,7 @@
 node {
     stage('Build') {
         // Set up the virtual environment and install dependencies
-        sh 'build.sh'
+        sh './jenkins/script/build.sh'
     }
     
     stage('Test') {
