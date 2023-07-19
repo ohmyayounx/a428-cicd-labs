@@ -1,4 +1,4 @@
-node
+node {
     stage('Build') {
         // Set up the virtual environment and install dependencies
         sh 'npm install'
@@ -18,4 +18,4 @@ node
         // Perform any additional steps for delivery (e.g., deploy to a server)
         // ...
     }
-}
+    }
