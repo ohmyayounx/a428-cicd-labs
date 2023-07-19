@@ -1,4 +1,4 @@
-pipeline {
+node {
     agent {
         docker {
             image 'node:lts-buster-slim'
@@ -8,8 +8,7 @@ pipeline {
     environment {
         CI = 'true'
     }
-    node {
-    stage ('Build') {
+    stages ('Build') {
        sh 'npm install'   
     }
     stage ('Test') {
