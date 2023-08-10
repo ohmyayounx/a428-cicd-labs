@@ -22,7 +22,6 @@ pipeline {
         stage('Manual Approval') {
             steps {
             input message: 'Lanjutkan ketahap deploy? (Click "Proceed" to continue)'
-            sh './jenkins/scripts/kill.sh'
             }
         }
         stage('Deploy') {
