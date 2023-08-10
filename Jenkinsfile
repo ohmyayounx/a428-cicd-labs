@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh './jenkins/scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sleep time : '60 second'
+                sleep time : 1m
                 sh './jenkins/scripts/kill.sh'
             }
         }
