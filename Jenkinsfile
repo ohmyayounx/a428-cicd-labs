@@ -1,21 +1,30 @@
-node {
-    stage('Build') {
-        // Set up the virtual environment and install dependencies
-        sh './jenkins/script/build.sh'
+pipeline {
+    agent {
+        docker {
+            image 'node:lts-buster-slim'
+            args '-p 3000:3000'
+        }
     }
-    
-    stage('Test') {
-        // Run tests
-        sh './jenkins/scripts/test.sh'
+    environment {
+        CI = 'true'
     }
-    
-    stage('Deliver') {
-        // Package the project for delivery (e.g., create a distribution package)
-        sh './jenkins/scripts/deliver.sh'
-        input message: 'Finished using the web site? (Click "Proceed" to continue)'
-        sh './jenkins/scripts/kill.sh'
-        
-        // Perform any additional steps for delivery (e.g., deploy to a server)
-        // ...
-    }   
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
     }
+}
